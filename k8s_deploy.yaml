@@ -9,4 +9,4 @@
     - name: Apply Service
       kubernetes.core.k8s:
         state: present
-        definition: "{{ lookup('file', 'service.yaml') }}"
+        definition: "{{ lookup('file', 'services.yaml') }}"
