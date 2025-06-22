@@ -1,0 +1,25 @@
+---
+- name: Deploy WAR in Docker using Ansible
+  hosts: docker-host
+  become: true
+
+  tasks:
+    - name: Copy project files to host
+      copy:
+        src: /path/to/local/project/
+        dest: /home/ubuntu/project/
+    
+    - name: Build Docker image
+      docker_image:
+        path: /home/ubuntu/project
+        name: ABCtechnologies-1.0
+        tag: latest
+        state: present
+
+    - name: Run Docker container
+      docker_container:
+        name: tomcat-container
+        image: ABCtechnologies-1.0:latest
+        state: started
+        ports:
+          - "9080:8080"
