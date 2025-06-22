@@ -1,0 +1,12 @@
+- name: Deploy to Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Apply Deployment
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', 'deployment.yaml') }}"
+
+    - name: Apply Service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', 'service.yaml') }}"
